@@ -51,15 +51,15 @@
 
 ## 	Shipping_addressesテーブル
 
-|  Column      |       Type   |   Options                                             |
-|--------------|--------------|-------------------------------------------------------|
-| zip_code     | string       | null: false                                           |
-| prefecture_id| integer      | null: false                                           |
-| city         | string       | null: false                                           |
-| address      | string       | null: false                                           |
-| address2     | string       |                                                       |
-| telephone    | string       | null: false                                           |
-| purchase     |              | null: false, foreign_key: true, references: purchases |
+|  Column      |       Type   |   Options                       |
+|--------------|--------------|---------------------------------|
+| zip_code     | string       | null: false                     |
+| prefecture_id| integer      | null: false                     |
+| city         | string       | null: false                     |
+| address      | string       | null: false                     |
+| address2     | string       |                                 |
+| telephone    | string       | null: false                     |
+| purchase     | references   | null: false, foreign_key: true  |
 
 ### Association
 - belongs_to :purchase
