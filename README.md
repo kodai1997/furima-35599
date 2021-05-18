@@ -22,14 +22,13 @@
 |  Column          |       Type   |   Options                      |
 |------------------|--------------|--------------------------------|
 | description      | text         | null: false                    |
+| user             | references   | null: false, foreign_key: true |
 | price            | integer      | null: false                    |
-| status	         | string       | null: false                    |
-| user             | references   | null: false, foreign_key: true |
-| user             | references   | null: false, foreign_key: true |
-| shipping_cost_id | string       | null: false                    |
-| shipping_days_id | string       | null: false                    |
-| shipping_area_id | string       | null: false                    |
-| category_id      | string       | null: false                    |
+| status_id	       | integer      | null: false                    |
+| shipping_cost_id | integer      | null: false                    |
+| shipping_days_id | integer      | null: false                    |
+| shipping_area_id | integer      | null: false                    |
+| category_id      | integer      | null: false                    |
 
 ### Association
 - belongs_to :user
@@ -46,20 +45,20 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one :address
+- has_one :Shipping_address
 
 
 ## 	Shipping_addressesテーブル
 
-|  Column   |       Type   |   Options                      |
-|-----------|--------------|--------------------------------|
-| zip_code  | integer      | null: false                    |
-| prefecture| string       | null: false                    |
-| city      | string       | null: false                    |
-| address   | string       | null: false                    |
-| address2  | string       |                                |
-| telephone | string       | null: false                    |
-| user      | references   | null: false, foreign_key: true |
+|  Column   |       Type   |   Options                                             |
+|-----------|--------------|-------------------------------------------------------|
+| zip_code  | integer      | null: false                                           |
+| prefecture| string       | null: false                                           |
+| city      | string       | null: false                                           |
+| address   | string       | null: false                                           |
+| address2  | string       |                                                       |
+| telephone | string       | null: false                                           |
+| user      | references   | null: false, foreign_key: true, references: purchases |
 
 ### Association
 - belongs_to :purchase
