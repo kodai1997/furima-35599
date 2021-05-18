@@ -21,6 +21,7 @@
 
 |  Column          |       Type   |   Options                      |
 |------------------|--------------|--------------------------------|
+| item_name        | text         | null: false                    |
 | description      | text         | null: false                    |
 | user             | references   | null: false, foreign_key: true |
 | price            | integer      | null: false                    |
