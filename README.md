@@ -21,7 +21,7 @@
 
 |  Column          |       Type   |   Options                      |
 |------------------|--------------|--------------------------------|
-| item_name        | string         | null: false                    |
+| name             | string         | null: false                    |
 | description      | text         | null: false                    |
 | user             | references   | null: false, foreign_key: true |
 | price            | integer      | null: false                    |
@@ -59,7 +59,7 @@
 | address      | string       | null: false                                           |
 | address2     | string       |                                                       |
 | telephone    | string       | null: false                                           |
-| user         |              | null: false, foreign_key: true, references: purchases |
+| purchase     |              | null: false, foreign_key: true, references: purchases |
 
 ### Association
 - belongs_to :purchase
