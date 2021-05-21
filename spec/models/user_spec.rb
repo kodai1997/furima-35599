@@ -134,6 +134,16 @@ RSpec.describe User, type: :model do
       @user.valid?
        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
+    it "family_name_kanaは半角文字だと登録できないこと" do
+      @user.family_name_kana = 'ﾃｽﾄ'
+      @user.valid?
+       expect(@user.errors.full_messages).to include("Family name kana is invalid. Input full-width katakana characters.")
+    end
+    it "first_name_kanaは半角文字だと登録できないこと" do
+      @user.first_name_kane = 'ﾃｽﾄ'
+      @user.valid?
+       expect(@user.errors.full_messages).to include("First name kane is invalid. Input full-width katakana characters.")
+    end
   end
 end
 end
