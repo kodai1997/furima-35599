@@ -97,6 +97,43 @@ RSpec.describe User, type: :model do
       @user.valid?
        expect(@user.errors.full_messages).to include("First name kane is invalid. Input full-width katakana characters.")
     end
+    it "emailは@なしでは登録できない" do
+      @user.email = 'testtest'
+      @user.valid?
+       expect(@user.errors.full_messages).to include("Email is invalid")
+    end
+    it "emailは登録済みのメールアドレスは登録できない"do
+      user1 = FactoryBot.create(:user, email: 'test@test')
+      user2 = FactoryBot.build(:user, email: 'test@test')
+      user2.valid?
+       expect(user2.errors.full_messages).to include("Email has already been taken")
+    end
+    it "passwordが全角のみだと登録できない" do
+      @user.password = '１２３４５６s'
+      @user.valid?
+       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
+    it "passwordが半角数字のみだと登録できない" do
+      @user.password = '1234567'
+      @user.valid?
+       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
+    it "passwordが半角英字のみだと登録できない" do
+      @user.password = 'abcdef'
+      @user.valid?
+       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
+    it "パスワードは、5文字以下では登録できないこと" do
+      @user.password = 'abcd1'
+      @user.valid?
+       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
+    it "パスワードとパスワード（確認用）、値が一致していなければ登録できないこと" do
+      @user.password = 'abcdef1'
+      @user.password_confirmation = 'aaaaaa1'
+      @user.valid?
+       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
   end
 end
 end
