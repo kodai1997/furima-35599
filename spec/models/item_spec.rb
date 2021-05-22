@@ -33,27 +33,27 @@ describe '商品出品' do
       expect(@item.errors.full_messages).to include("Description can't be blank")
     end
     it "category_idが1だと登録できない" do
-      @item.category_id = '1'
+      @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Category must be other than 1")
     end
     it "status_idが1だと登録できない" do
-      @item.status_id = '1'
+      @item.status_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Status must be other than 1")
     end
     it "shipping_costが1だと登録できない" do
-      @item.shipping_cost_id = '1'
+      @item.shipping_cost_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping cost must be other than 1")
     end
     it "prefectureが1だと登録できない" do
-      @item.prefecture_id = '1'
+      @item.prefecture_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
     end
     it "shipping_daysが1だと登録できない" do
-      @item.shipping_days_id = '1'
+      @item.shipping_days_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping days must be other than 1")
     end
@@ -76,6 +76,16 @@ describe '商品出品' do
       @item.price = '10000000'
       @item.valid?
       expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+    end
+    it "販売価格が半角英語だけでは登録できないこと" do
+      @item.price = 'abcde'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not a number")
+    end
+    it "販売価格が半角英数混合では登録できないこと" do
+      @item.price = 'a123b4c'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not a number")
     end
    end
  end

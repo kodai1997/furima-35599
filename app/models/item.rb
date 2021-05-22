@@ -1,6 +1,11 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
+  belongs_to :Prefecture
+  belongs_to :shipping_cost
+  belongs_to :shipping_days
+  belongs_to :status
+  belongs_to :user
   has_one_attached :image
 
 
