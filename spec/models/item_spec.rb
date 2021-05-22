@@ -11,7 +11,7 @@ describe '商品出品' do
       expect(@item).to be_valid
     end
     it "販売価格が半角数字であれば保存可能" do
-      @item.price = '3456'
+      @item.price = 3456
       expect(@item).to be_valid
     end
   end
@@ -68,12 +68,12 @@ describe '商品出品' do
       expect(@item.errors.full_messages).to include("Price is not a number")
     end
     it "販売価格が300円以下は保存ができない" do
-      @item.price = '299'
+      @item.price = 299
       @item.valid?
       expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
     end
     it "販売価格が10000000円以上は保存ができない" do
-      @item.price = '10000000'
+      @item.price = 10000000
       @item.valid?
       expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
     end
