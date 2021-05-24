@@ -1,6 +1,6 @@
 class Order
   include ActiveModel::Model
-  attr_accessor :zip_code, :prefecture_id, :city, :address, :telephone, :purchase
+  attr_accessor :iitem, :user, :zip_code, :prefecture_id, :city, :address, :telephone, :purchase
 
   with_options presence: true do
     validates :zip_code
@@ -9,6 +9,8 @@ class Order
     validates :address
     validates :telephone
     validates :purchase
+    validates :item
+    validates :user
    end
 
   def save
