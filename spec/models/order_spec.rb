@@ -10,6 +10,7 @@ RSpec.describe Order, type: :model do
     sleep 0.1
 end
 
+
 describe '商品購入' do
   context '商品出品がうまくいくとき' do
     it "zip_code,prefecture_id,city,address,telephone,tokenが存在すれば登録できる" do
