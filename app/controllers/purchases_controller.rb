@@ -41,14 +41,12 @@ class PurchasesController < ApplicationController
   end
 
   def prevent_user
-    @item = Item.find(params[:item_id])
     if @item.user == current_user
       redirect_to root_path
     end
   end
 
   def after_purchase
-    @item = Item.find(params[:item_id])
     unless @item.purchase.blank?
       redirect_to root_path
     end

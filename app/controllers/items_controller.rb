@@ -57,7 +57,6 @@ class ItemsController < ApplicationController
   end
 
   def after_purchase
-    @item = Item.find(params[:id])
     unless @item.purchase.blank?
       redirect_to root_path
     end

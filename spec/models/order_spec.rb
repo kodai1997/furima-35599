@@ -2,7 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   before do
+    item = FactoryBot.create(:item) 
+    user = FactoryBot.create(:user) 
     @order = FactoryBot.build(:order)
+    @order.item_id = item.id
+    @order.user_id = user.id
+    sleep 0.1
 end
 
 describe '商品購入' do
@@ -16,6 +21,10 @@ describe '商品購入' do
     end
     it "電話番号は11桁以内の数値であれば保存可能" do
       @order.telephone = 12345678901
+      expect(@order).to be_valid
+    end
+    it "建物番号は空でも保存可能" do
+      @order.address2 = ''
       expect(@order).to be_valid
     end
   end
@@ -56,10 +65,25 @@ describe '商品購入' do
       @order.valid?
       expect(@order.errors.full_messages).to include("Telephone is invalid. Include hyphen(-)")
     end
+    it "telephoneが英数混合では登録できないこと" do
+      @order.telephone = '123as1234ji'
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Telephone is invalid. Include hyphen(-)")
+    end
     it "tokenが空だと登録できない" do
       @order.token = ''
       @order.valid?
       expect(@order.errors.full_messages).to include("Token can't be blank")
+    end
+    it "user_idが空だと登録できない" do
+      @order.user_id = ''
+      @order.valid?
+      expect(@order.errors.full_messages).to include("User can't be blank")
+    end
+    it "item_idが空だと登録できない" do
+      @order.item_id = ''
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Item can't be blank")
     end
    end
  end
