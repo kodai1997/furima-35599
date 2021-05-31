@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :description
-    validates :price, format: { with: /\A[0-9]+\z/, message: "is not a number"}
+    validates :price, format: { with: /\A[0-9]+\z/}
     validates :status_id
     validates :shipping_cost_id
     validates :shipping_days_id
